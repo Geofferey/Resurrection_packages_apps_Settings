@@ -171,6 +171,14 @@
         android:summary="@string/summary_placeholder"
         settings:allowDividerAbove="true"/>
 
+    <!-- Build user -->
+    <Preference
+        android:key="build_user"
+        android:order="44"
+        android:title="@string/build_user"
+        android:summary="@string/build_username"
+        settings:allowDividerAbove="true"/>
+
     <!-- SELinux status information -->
     <Preference
         android:key="selinux_status"
