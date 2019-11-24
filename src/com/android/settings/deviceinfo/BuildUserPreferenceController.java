@@ -27,6 +27,10 @@ public class BuildUserPreferenceController extends AbstractPreferenceController 
     private static final String KEY_BUILD_USER = "build_user";
     
     private static final String PROPERTY_BUILD_USER = "ro.build.user";
+    
+    private static final String PROPERTY_BUILD_HOST = "ro.build.host";
+
+    private static final String PROPERTY_RR_BUILD_USER = "ro.rr.build.user";
 
     public BuildUserPreferenceController(Context context) {
         super(context);
@@ -40,7 +44,15 @@ public class BuildUserPreferenceController extends AbstractPreferenceController 
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        preference.setSummary(SystemProperties.get(PROPERTY_BUILD_USER));
+        String rr_build_user = SystemProperties.get(PROPERTY_RR_BUILD_USER);
+        String build_user = SystemProperties.get(PROPERTY_BUILD_USER);
+        String build_host = SystemProperties.get(PROPERTY_BUILD_HOST);
+        String build_user_host = build_user + "@" + build_host;
+        if(rr_build_user != null && rr_build_user.length() > 0) {
+            preference.setSummary(rr_build_user);
+        } else {
+            preference.setSummary(build_user_host);
+        }
     }
 
     @Override
